@@ -6,5 +6,5 @@ install:
 get-corpus:
 	cd languages && ./get-corpuses.sh
 
-trian-en-eu:
+train-en-eu:
 	cd languages/en-eu/ && ./voc.sh && ./train.sh

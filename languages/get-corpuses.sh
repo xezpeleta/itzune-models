@@ -1,6 +1,6 @@
 #!/bin/bash
 
-git clone --depth=1 https://github.com/xezpeleta/parallel-basque-corpus corpus-raw
+git clone --depth=1 git@hf.co:datasets/xezpeleta/parallel-basque-corpus
 cd corpus-raw
 
 #declare -a arr=("eng-cat" "deu-cat" "ita-cat" "fra-cat" "spa-cat" "nld-cat" "por-cat" "jpn-cat" "glg-cat" "oci-cat")
