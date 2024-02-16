@@ -4,7 +4,7 @@
 
 wget -O flores.zip https://github.com/openlanguagedata/flores/releases/download/v2.0-alpha.2/floresp-v2.0-alpha.2.zip
 unzip -P "multilingual machine translation" flores.zip
-cp flores/dev/dev.eus_Latn flores200.eus
-cp flores/dev/dev.eng_Latn flores200.eng
-cp flores/dev/dev.spa_Latn flores200.spa
-cp flores/dev/dev.fra_Latn flores200.fra
+cp floresp-v2.0-alpha.2/devtest/devtest.eus_Latn flores200.eus
+cp floresp-v2.0-alpha.2/devtest/devtest.eng_Latn flores200.eng
+cp floresp-v2.0-alpha.2/devtest/devtest.spa_Latn flores200.spa
+cp floresp-v2.0-alpha.2/devtest/devtest.fra_Latn flores200.fra
