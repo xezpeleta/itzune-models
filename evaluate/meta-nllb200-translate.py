@@ -53,32 +53,8 @@ def main():
     print("Translates flores200 datasets using HuggingFace Facebook nllb200 models")
 
     pair_languages = {
-        "de-ca" : ["deu", "cat"],
-        "ca-de" : ["cat", "deu"],
-
-        "fr-ca" : ["fra", "cat"],
-        "ca-fr" : ["cat", "fra"],
-
-        "es-ca" : ["spa", "cat"],
-        "ca-es" : ["cat", "spa"],
-
-        "it-ca" : ["ita", "cat"],
-        "ca-it" : ["cat", "ita"],
-
-        "nl-ca" : ["nld", "cat"],
-        "ca-nl" : ["cat", "nld"],
-
-        "en-ca" : ["eng", "cat"],
-        "ca-en" : ["cat", "eng"],
-
-        "pt-ca" : ["por", "cat"],
-        "ca-pt" : ["cat", "por"],
-
-        "gl-ca" : ["glg", "cat"],
-        "ca-gl" : ["cat", "glg"],
-
-        "oc-ca" : ["oci", "cat"],
-        "ca-oc" : ["cat", "oci"],
+        "en-eu" : ["eng", "eus"],
+        "eu-en" : ["eus", "eng"],
     }
 
     blue_scores = {}
