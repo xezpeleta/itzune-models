@@ -19,9 +19,13 @@
 # Boston, MA 02111-1307, USA.
 
 import os
-from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, pipeline
 import datetime
 import json
+import urllib
+import urllib.request
+import itzuli
+import time
+from optparse import OptionParser
 
 def file_len(fname):
     if not os.path.isfile(fname):
@@ -34,10 +38,15 @@ def file_len(fname):
 
     return i + 1
 
-def get_sacrebleu(reference_file, hypotesis_file):
+def get_sacrebleu(reference_file, hypotesis_file ,target_language):
     JSON_FILE = 'bleu.json'
+    
+    if target_language == "jpn":
+        tokenizer="--tokenize ja-mecab"
+    else:
+        tokenizer = ""
 
-    cmd = f'sacrebleu {reference_file}  -i {hypotesis_file} -m bleu > {JSON_FILE}'
+    cmd = f'sacrebleu {tokenizer} {reference_file}  -i {hypotesis_file} -m bleu > {JSON_FILE}'
     os.system(cmd)
     with open(JSON_FILE) as f:
         data = json.load(f)
@@ -45,68 +54,101 @@ def get_sacrebleu(reference_file, hypotesis_file):
     return f"{data['score']:0.1f}"
 
 def save_json(scores):
-	with open("meta-bleu.json", "w") as outfile:
+	with open("elia-bleu.json", "w") as outfile:
 		json.dump(scores, outfile, indent=4)
 
 
-def main():
-    print("Translates flores200 datasets using HuggingFace Facebook nllb200 models")
+def _translate_text_elia(text, pair):
+    
+    src_lang, tgt_lang = pair.split("-")
+    translated = itzuli.translate(text, src_lang, tgt_lang)
+    # Respect eizu.eus - wait 30 seconds
+    time.sleep(30)
+    return translated
 
+
+def translate_elia(source, target, pair):
+
+    strings = 0
+    with open(source, 'r') as tf_en, open(target, 'w') as tf_ca:
+        en_strings = tf_en.readlines()
+
+        cnt = 0
+        for string in en_strings:
+            cnt = cnt + 1
+    
+            try:
+                translated = _translate_text_elia(string, pair)
+                tf_ca.write("{0}\n".format(translated))
+                strings = strings + 1
+
+            except Exception as e:
+                print(e)
+                print(string)
+
+                translated = 'Error'
+                tf_ca.write("{0}\n".format(translated))
+                strings = strings + 1
+
+    print("Translated {0} strings".format(strings))
+    
+    
+    
+
+def read_parameters():
+    parser = OptionParser()
+
+    parser.add_option(
+        '-k',
+        '--key',
+        action='store',
+        type='string',
+        dest='key',
+        default='',
+        help='API Key to use (if applies)'
+    )
+
+    (options, args) = parser.parse_args()
+
+    return options.key
+
+
+
+
+def main():
+    print("Translates flores200 datasets using Elhuyar Elia.eus")
+    
     pair_languages = {
         "en-eu" : ["eng", "eus"],
         "eu-en" : ["eus", "eng"],
     }
 
     blue_scores = {}
-
-#    model_name = f'nllb-200-distilled-600M'
-    model_name = f'nllb-200-3.3B'
-                
-    tokenizer = AutoTokenizer.from_pretrained(f"facebook/{model_name}")
-    model = AutoModelForSeq2SeqLM.from_pretrained(f"facebook/{model_name}")
-    print(f"Model name: {model_name}")
-    
     for pair_language in pair_languages:
         source_language = pair_languages[pair_language][0]
         target_language = pair_languages[pair_language][1]
 #        print(f"source_language: {source_language}")
 #        print(f"target_language: {target_language}")
-        
-        hypotesis_file = f"meta-nllb-200/flores200-{model_name}-{source_language}-{target_language}.{target_language}"
+
+        hypotesis_file = f"elia-translate/flores200-{source_language}-{target_language}.{target_language}"
         input_file = f"flores200.{source_language}"
 
-#        print(f"hypo {hypotesis_file}")
-#        print(f"input_file {input_file}")
+        print(f"hypo {hypotesis_file}")
+        print(f"input_file {input_file}")
 
         start_time = datetime.datetime.now()
         LINES_IN_DATA_SET = 1012
         if file_len(hypotesis_file) != LINES_IN_DATA_SET:
-            cnt = 0
-            translator = pipeline('translation', model=model, tokenizer=tokenizer, src_lang=f'{source_language}' + "_Latn", tgt_lang=f'{target_language}' + "_Latn", max_length=400)
-            with open(input_file, "r") as source, open(hypotesis_file, "w") as target:
-
-                while True:
-                    src = source.readline()
-
-                    if not src:
-                        break
-
-                    translated = translator(src)
-#                    print(translated)
-                    t = translated[0]['translation_text']
-                    target.write(t + "\n")
-                    cnt += 1
-                    if cnt % 100 == 0:
-                        print(cnt)
-                    
+            translate_elia(input_file, hypotesis_file, f"{pair_language}")
+            
 
         reference_file = f"flores200.{target_language}"
-        sacrebleu = get_sacrebleu(reference_file, hypotesis_file)
+        sacrebleu = get_sacrebleu(reference_file, hypotesis_file, target_language)
         blue_scores[f'{source_language}-{target_language}'] = sacrebleu
         print(f"'{source_language}-{target_language}', BLEU: '{sacrebleu}'")
+    save_json(blue_scores)
     s = 'Time used: {0}'.format(datetime.datetime.now() - start_time)
     print(s)
-    save_json(blue_scores)
 
 if __name__ == "__main__":
     main()

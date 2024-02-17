@@ -1,0 +1,14 @@
+source_files:
+    - corpus-raw/ccmatrix.en-eu.en
+    - corpus-raw/opensubtitles.en-eu.en
+    - corpus-raw/xlent.en-eu.en
+    - corpus-raw/gnome.en-eu.en
+    - corpus-raw/paco.en-eu.en
+
+
+target_files:
+    - corpus-raw/ccmatrix.en-eu.eu
+    - corpus-raw/opensubtitles.en-eu.eu
+    - corpus-raw/xlent.en-eu.eu
+    - corpus-raw/gnome.en-eu.eu
+    - corpus-raw/paco.en-eu.eu

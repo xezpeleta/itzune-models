@@ -1,10 +1,11 @@
 #!/bin/bash
 
-git clone --depth=1 https://huggingface.co/datasets/xezpeleta/parallel-basque-corpus
+
+git clone --depth=1 https://huggingface.co/datasets/xezpeleta/parallel-basque-corpus corpus-raw
 cd corpus-raw
 
 #declare -a arr=("eng-cat" "deu-cat" "ita-cat" "fra-cat" "spa-cat" "nld-cat" "por-cat" "jpn-cat" "glg-cat" "oci-cat")
-declare -a arr=("en-eu")
+declare -a arr=("eng-eus")
 
 for dirname in "${arr[@]}"; do
     echo Copying $dirname

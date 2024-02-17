@@ -16,11 +16,14 @@ from urllib.parse import urlparse
 URL = 'https://www.softcatala.org/pub/softcatala/opennmt/models/2022-11-22/'
 EXT = 'zip'
 
+'''
 def get_list_of_models(url, ext=''):
     page = requests.get(url).text
     soup = BeautifulSoup(page, 'html.parser')
     return [url + node.get('href') for node in soup.find_all('a') if node.get('href').endswith(ext)]
-
+'''
+def get_list_of_models(url, ext=''):
+    return "https://huggingface.co/itzune/eng-eus"
 
 def download_file(url, filename):
     req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
@@ -105,6 +108,7 @@ def get_blue_score(language_pair, scores):
 def convert_iso_639_3_to_string(language_pair):
     languages = {
         "eng" : "English",
+        "eus" : "Basque",
         "spa" : "Spanish",
         "fra" : "French",
         "cat" : "Catalan",
@@ -163,13 +167,13 @@ def get_metrics_from_model_zipfile(url, language_pair):
     ZIP_FILE = "model.zip"
     DIR = "tmp/"
 
-    if os.path.isdir(DIR):
-        shutil.rmtree(DIR)
+    #if os.path.isdir(DIR):
+    #    shutil.rmtree(DIR)
 
     os.mkdir(DIR)
     os.chdir(DIR)
 
-    download_file(url, ZIP_FILE)
+    #download_file(url, ZIP_FILE)
 
     cmd = 'unzip {0} > /dev/null'.format(ZIP_FILE)
     os.system(cmd)
@@ -191,8 +195,9 @@ def main():
         table_md.write(f"{head}\n")
         table_cvs.write("{0}\n".format(head.replace("|",",")))
         table_md.write("|---|---|---|---|---|---|---|---\n")
-        models = get_list_of_models(URL, EXT)
-        models = get_sorted_models(models)
+        #models = get_list_of_models(URL, EXT)
+        #models = get_sorted_models(models)
+        models = "http://domain.com/eng-eus-20240216.zip"
         for url in models:
                          
             language_pair = get_language_pair(url)

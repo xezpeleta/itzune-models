@@ -50,28 +50,10 @@ def save_json(scores):
 
 def main():
     print("Translates flores200 datasets using HuggingFace opus-mt models")
-
+    
     pair_languages = {
-        "fr-ca" : ["fra", "cat"],
-        "ca-fr" : ["cat", "fra"],
-
-        "es-ca" : ["spa", "cat"],
-        "ca-es" : ["cat", "spa"],
-
-        "it-ca" : ["ita", "cat"],
-        "ca-it" : ["cat", "ita"],
-
-        "nl-ca" : ["nld", "cat"],
-        "ca-nl" : ["cat", "nld"],
-
-        "en-ca" : ["eng", "cat"],
-        "ca-en" : ["cat", "eng"],
-
-        "de-ca" : ["deu", "cat"],
-        "ca-de" : ["cat", "deu"],
-
-        "pt-ca" : ["por", "cat"],
-        "ca-pt" : ["cat", "por"],
+        "en-eu" : ["eng", "eus"],
+        "eu-en" : ["eus", "eng"],
     }
 
     blue_scores = {}
