@@ -1,2 +1,5 @@
 #Do not upload flores200 evaluation corpus raw files
 flores200*
+
+#Do not upload last Bleu test results
+bleu.json
