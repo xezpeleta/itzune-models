@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-git clone --depth=1 https://huggingface.co/datasets/xezpeleta/parallel-basque-corpus corpus-raw
+git clone --depth=1 https://huggingface.co/datasets/itzune/basque-parallel-corpus corpus-raw
 cd corpus-raw
 
 #declare -a arr=("eng-cat" "deu-cat" "ita-cat" "fra-cat" "spa-cat" "nld-cat" "por-cat" "jpn-cat" "glg-cat" "oci-cat")
