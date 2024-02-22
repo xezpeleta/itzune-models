@@ -6,6 +6,11 @@ source_files:
     - corpus-raw/paco.en-eu.en
     - corpus-raw/hplt.en-eu.en
     - corpus-raw/ehuhac.en-eu.en
+    - corpus-raw/kde4.en-eu.en
+    - corpus-raw/tatoeba.en-eu.en
+    - corpus-raw/wikinews.en-eu.en
+    - corpus-raw/wikihealth.en-eu.en
+    - corpus-raw/dictionary.en-eu.en
 
 
 target_files:
@@ -16,3 +21,8 @@ target_files:
     - corpus-raw/paco.en-eu.eu
     - corpus-raw/hplt.en-eu.eu
     - corpus-raw/ehuhac.en-eu.eu
+    - corpus-raw/kde4.en-eu.eu
+    - corpus-raw/tatoeba.en-eu.en
+    - corpus-raw/wikinews.en-eu.en
+    - corpus-raw/wikihealth.en-eu.en
+    - corpus-raw/dictionary.en-eu.en
