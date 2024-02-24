@@ -14,8 +14,8 @@ Language pair | Itzune BLEU | Itzune Flores200 BLEU | Google BLEU | Meta NLLB200
 |English-Basque | 26.6 |17.6 |- |13.2|11.3| 19050400 | [eng-eus-2024-02-20.zip](https://huggingface.co/itzune/itzune-models-zip/raw/main/eng-eus-2024-02-20.zip)
 
 Legend:
-* *SC Model BLEU* column indicates the Itzune models' BLEU score against the corpus test dataset (from train/dev/test)
-* *SC Flores200 BLEU* column indicates the Itzune models' BLEU score against [Flores200 benchmark dataset](https://github.com/facebookresearch/flores). This provides an external evaluation
+* *Itzune Model BLEU* column indicates the Itzune models' BLEU score against the corpus test dataset (from train/dev/test)
+* *Itzune Flores200 BLEU* column indicates the Itzune models' BLEU score against [Flores200 benchmark dataset](https://github.com/facebookresearch/flores). This provides an external evaluation
 * *Google BLEU* is the BLUE score of Google Translate using the Flores200 benchmark
 * *Opus-MT BLEU* is the BLUE score of the [Opus-MT models](https://github.com/Helsinki-NLP/Opus-MT) using the Flores200 benchmark (our ambition is to outperform them)
 * *Sentences* is the number of sentences in the corpus used for training
