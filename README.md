@@ -11,7 +11,7 @@ And here the tools to serve these models in production: https://github.com/xezpe
 # Models
 Language pair | Itzune BLEU | Itzune Flores200 BLEU | Google BLEU | Meta NLLB200 BLEU | Opus-MT BLEU | Sentences | Download model
 |---|---|---|---|---|---|---|---
-|English-Basque | 29.4 |15.9 |- |13.2|11.3| 19050400 | [eng-eus-2024-02-14.zip](https://huggingface.co/itzune/itzune-models-zip/raw/main/eng-eus-2024-02-14.zip)
+|English-Basque | 26.6 |17.6 |- |13.2|11.3| 19050400 | [eng-eus-2024-02-20.zip](https://huggingface.co/itzune/itzune-models-zip/raw/main/eng-eus-2024-02-20.zip)
 
 Legend:
 * *SC Model BLEU* column indicates the Itzune models' BLEU score against the corpus test dataset (from train/dev/test)
